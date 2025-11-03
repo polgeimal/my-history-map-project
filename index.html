@@ -1,1 +1,24 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Интерактивная карта</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+</head>
+<body>
+    <div id="top-panel">
+        <input type="range" id="timeline" min="1900" max="2025" value="2000">
+    </div>
+
+    <div id="map" style="height: 500px;"></div>
+
+    <div id="bottom-panel">
+        <div id="events-list"></div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
 
