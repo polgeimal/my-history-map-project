@@ -73,3 +73,30 @@ document.getElementById('mode-books').addEventListener('click', () => {
     updateMap();
     updateList();
 });
+
+function createTimelineMarks() {
+    const marksDiv = document.getElementById('timeline-marks');
+    marksDiv.innerHTML = '';
+
+    const min = parseInt(document.getElementById('timeline').min);
+    const max = parseInt(document.getElementById('timeline').max);
+
+    const total = max - min;
+    // метки каждые 100 лет
+    for (let year = min; year <= max; year += 100) {
+        const span = document.createElement('span');
+        let label = '';
+        if (year < 0) label = `${Math.abs(year)} до н.э.`;
+        else label = `${year} н.э.`;
+        span.textContent = label;
+
+        // вычисляем процент позиции по ползунку
+        const percent = ((year - min) / total) * 100;
+        span.style.left = `${percent}%`;
+
+        marksDiv.appendChild(span);
+    }
+}
+
+// создаём метки при загрузке
+createTimelineMarks();
