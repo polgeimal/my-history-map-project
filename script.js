@@ -86,7 +86,6 @@ document.getElementById('mode-books').addEventListener('click', () => {
     updateList();
 });
 
-// создание меток на таймлайне
 function createTimelineMarks() {
     const marksDiv = document.getElementById('timeline-marks');
     marksDiv.innerHTML = '';
@@ -95,12 +94,31 @@ function createTimelineMarks() {
     const max = parseInt(document.getElementById('timeline').max);
     const total = max - min;
 
-    // метки каждые 100 лет
-    for(let year = min; year <= max; year += 100) {
+    // античные века до н.э.
+    for(let year = min; year < 0; year += 100) {
         const span = document.createElement('span');
-        span.textContent = year < 0 ? `${Math.abs(year)} до н.э.` : `${year} н.э.`;
+        span.textContent = `${Math.abs(year)} до н.э.`;
+        const percent = ((year - min) / total) * 100;
+        span.style.left = `${percent}%`;
+        marksDiv.appendChild(span);
+    }
+
+    // века после н.э. до 1500
+    for(let year = 0; year <= 1500; year += 100) {
+        const span = document.createElement('span');
+        span.textContent = `${year} н.э.`;
+        const percent = ((year - min) / total) * 100;
+        span.style.left = `${percent}%`;
+        marksDiv.appendChild(span);
+    }
+
+    // десятилетия последних 500 лет
+    for(let year = 1500; year <= max; year += 10) {
+        const span = document.createElement('span');
+        span.textContent = `${year} н.э.`;
         const percent = ((year - min) / total) * 100;
         span.style.left = `${percent}%`;
         marksDiv.appendChild(span);
     }
 }
+
