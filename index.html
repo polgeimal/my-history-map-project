@@ -2,16 +2,19 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Интерактивная карта</title>
+    <title>Историческая карта</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
 </head>
 <body>
     <div id="top-panel">
-        <input type="range" id="timeline" min="1900" max="2025" value="2000">
+        <button id="mode-events" class="active">События</button>
+        <button id="mode-books">Книги</button>
+        <input type="range" id="timeline" min="-1000" max="2000" value="0" step="1">
+        <span id="timeline-label">0</span>
     </div>
 
-    <div id="map" style="height: 500px;"></div>
+    <div id="map"></div>
 
     <div id="bottom-panel">
         <div id="events-list"></div>
@@ -21,4 +24,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-
