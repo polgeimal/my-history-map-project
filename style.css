@@ -1,1 +1,7 @@
+body { margin:0; font-family:sans-serif; }
+#top-panel { background:#eee; padding:10px; display:flex; align-items:center; gap:10px; }
+#map { height: 500px; }
+#bottom-panel { background:#f5f5f5; padding:10px; max-height:150px; overflow-x:auto; white-space:nowrap; }
+#bottom-panel div { display:inline-block; margin-right:10px; padding:5px; background:#ddd; border-radius:5px; cursor:pointer; }
+button.active { background:#999; color:white; }
 
