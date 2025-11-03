@@ -4,11 +4,11 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap contributors'
 }).addTo(map);
 
-let mode = 'events'; // по умолчанию показываем события
+let mode = 'events';
 let markers = [];
 let places = [];
 
-// загружаем данные
+// Загрузка данных
 fetch('data.json')
     .then(r => r.json())
     .then(data => {
@@ -18,13 +18,12 @@ fetch('data.json')
         updateList();
     });
 
-// обновление карты
 function updateMap() {
     markers.forEach(m => map.removeLayer(m));
     markers = [];
 
     const year = parseInt(document.getElementById('timeline').value);
-    const range = 50; // ±50 лет
+    const range = 50;
 
     places.forEach(place => {
         let items = mode === 'events' ? place.events : place.books;
@@ -40,7 +39,6 @@ function updateMap() {
     });
 }
 
-// обновление нижней панели
 function updateList() {
     const listDiv = document.getElementById('events-list');
     listDiv.innerHTML = '';
@@ -62,14 +60,14 @@ function updateList() {
     });
 }
 
-// обновление таймлайна при движении ползунка
+// Таймлайн
 document.getElementById('timeline').addEventListener('input', e => {
     document.getElementById('timeline-label').textContent = e.target.value;
     updateMap();
     updateList();
 });
 
-// переключение режимов
+// Переключение событий / книг
 document.getElementById('mode-events').addEventListener('click', () => {
     mode = 'events';
     document.getElementById('mode-events').classList.add('active');
@@ -77,7 +75,6 @@ document.getElementById('mode-events').addEventListener('click', () => {
     updateMap();
     updateList();
 });
-
 document.getElementById('mode-books').addEventListener('click', () => {
     mode = 'books';
     document.getElementById('mode-books').classList.add('active');
@@ -86,6 +83,7 @@ document.getElementById('mode-books').addEventListener('click', () => {
     updateList();
 });
 
+// Метки таймлайна
 function createTimelineMarks() {
     const marksDiv = document.getElementById('timeline-marks');
     marksDiv.innerHTML = '';
@@ -98,17 +96,15 @@ function createTimelineMarks() {
     for(let year = min; year < 0; year += 100) {
         const span = document.createElement('span');
         span.textContent = `${Math.abs(year)} до н.э.`;
-        const percent = ((year - min) / total) * 100;
-        span.style.left = `${percent}%`;
+        span.style.left = ((year - min) / total * 100) + '%';
         marksDiv.appendChild(span);
     }
 
-    // века после н.э. до 1500
+    // века н.э. до 1500
     for(let year = 0; year <= 1500; year += 100) {
         const span = document.createElement('span');
         span.textContent = `${year} н.э.`;
-        const percent = ((year - min) / total) * 100;
-        span.style.left = `${percent}%`;
+        span.style.left = ((year - min) / total * 100) + '%';
         marksDiv.appendChild(span);
     }
 
@@ -116,9 +112,7 @@ function createTimelineMarks() {
     for(let year = 1500; year <= max; year += 10) {
         const span = document.createElement('span');
         span.textContent = `${year} н.э.`;
-        const percent = ((year - min) / total) * 100;
-        span.style.left = `${percent}%`;
+        span.style.left = ((year - min) / total * 100) + '%';
         marksDiv.appendChild(span);
     }
 }
-
